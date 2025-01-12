@@ -16,16 +16,12 @@ export interface CarProps {
 }
 
 export interface FilterProps {
-  manufacturer?: string;
+  make?: string;
   year?: number;
   model?: string;
-  limit?: number;
-  fuel?: string;
+  fuel_type?: string;
 }
 
-export interface HomeProps {
-  searchParams: FilterProps;
-}
 
 export interface CarCardProps {
   model: string;
@@ -46,7 +42,6 @@ export interface CustomButtonProps {
   handleClick?: MouseEventHandler<HTMLButtonElement>;
 }
 
-
 export interface OptionProps {
   title: string;
   value: string;
@@ -62,7 +57,7 @@ export interface ShowMoreProps {
   isNext: boolean;
 }
 
-export interface SearchManuFacturerProps {
-  manufacturer: string;
-  setManuFacturer: (manufacturer: string) => void;
+export interface SearchMakerProps {
+  maker: string;
+  setMaker: (maker: string) => void;
 }

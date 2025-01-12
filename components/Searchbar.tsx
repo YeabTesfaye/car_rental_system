@@ -2,7 +2,7 @@
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { FormEvent, useState } from 'react';
-import SearchManufacturer from './SearchManufacturer';
+import SearchMaker from './SearchMaker';
 
 const SearchButton = ({ otherClasses }: { otherClasses: string }) => (
   <button type="submit" className={`-ml-3 z-10 ${otherClasses}`}>
@@ -17,7 +17,7 @@ const SearchButton = ({ otherClasses }: { otherClasses: string }) => (
 );
 
 const Searchbar = () => {
-  const [manufacturer, setManufacturer] = useState('');
+  const [maker, setMaker] = useState('');
   const [model, setModel] = useState('');
 
   const router = useRouter();
@@ -25,14 +25,14 @@ const Searchbar = () => {
   const handleSearch = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (manufacturer.trim() === '' && model.trim() === '') {
+    if (maker.trim() === '' && model.trim() === '') {
       return alert('please provide some input');
     }
 
-    updateSearchParams(model.toLowerCase(), manufacturer.toLowerCase());
+    updateSearchParams(model.toLowerCase(), maker.toLowerCase());
   };
 
-  const updateSearchParams = (model: string, manufacturer: string) => {
+  const updateSearchParams = (model: string, maker: string) => {
     // Create a new URLSearchParams object using the current URL search parameter
     const searchParams = new URLSearchParams(window.location.search);
 
@@ -43,10 +43,10 @@ const Searchbar = () => {
       searchParams.delete('model');
     }
     // Update or delete the 'manufacturer' search parameter based on the 'manufacturer' value
-    if (manufacturer) {
-      searchParams.set('manufacturer', manufacturer);
+    if (maker) {
+      searchParams.set('maker', maker);
     } else {
-      searchParams.delete('manufacturer');
+      searchParams.delete('maker');
     }
 
     const newPathname = `${
@@ -58,10 +58,8 @@ const Searchbar = () => {
   return (
     <form className="searchbar" onSubmit={handleSearch}>
       <div className="searchbar__item">
-        <SearchManufacturer
-          manufacturer={manufacturer}
-          setManuFacturer={setManufacturer}
-        />
+        <SearchMaker maker={maker} setMaker={setMaker} />
+
         <SearchButton otherClasses="sm:hidden" />
         <div className="searchbar__item">
           <Image

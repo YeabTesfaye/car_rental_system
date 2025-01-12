@@ -1,4 +1,4 @@
-export const manufacturers = [
+export const makers = [
   'Acura',
   'Alfa Romeo',
   'Aston Martin',
