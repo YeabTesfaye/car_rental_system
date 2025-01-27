@@ -19,6 +19,8 @@ const SearchButton = ({ otherClasses }: { otherClasses: string }) => (
 const Searchbar = () => {
   const [maker, setMaker] = useState('');
   const [model, setModel] = useState('');
+  console.log(maker);
+  console.log(model);
 
   const router = useRouter();
 
@@ -36,24 +38,22 @@ const Searchbar = () => {
     // Create a new URLSearchParams object using the current URL search parameter
     const searchParams = new URLSearchParams(window.location.search);
 
-    // Update or delete the 'model' search parameter based on the 'model' value
-    if (model) {
-      searchParams.set('model', model);
-    } else {
-      searchParams.delete('model');
-    }
-    // Update or delete the 'manufacturer' search parameter based on the 'manufacturer' value
-    if (maker) {
-      searchParams.set('maker', maker);
-    } else {
-      searchParams.delete('maker');
-    }
+    // Helper function to update or remove parameter
+    const updateParam = (key: string, value: string) => {
+      if (value) {
+        searchParams.set(key, value);
+      } else {
+        searchParams.delete(key);
+      }
+    };
 
-    const newPathname = `${
-      window.location.pathname
-    }?${searchParams.toString()}`;
+    // Update 'model' and 'maker' parameter
+    updateParam('model', model);
+    updateParam('maker', maker);
 
-    router.push(newPathname);
+    const newUrl = `${window.location.pathname}?${searchParams.toString()}`;
+
+    router.push(newUrl);
   };
   return (
     <form className="searchbar" onSubmit={handleSearch}>

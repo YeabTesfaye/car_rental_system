@@ -27,10 +27,10 @@ const Home = async ({
         </div>
         <div className="home__filters">
           <Searchbar />
-          {/* <div className="home__filter-container">
+          <div className="home__filter-container">
             <CustomFilter title="fuel" options={fuels} />
             <CustomFilter title="year" options={yearsOfProduction} />
-          </div> */}
+          </div>
         </div>
 
         {allCars && allCars.length > 0 ? (
